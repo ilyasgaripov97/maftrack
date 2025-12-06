@@ -1,3 +1,7 @@
+class Player:
+
+    ...
+
 class Game:
 
     ...
