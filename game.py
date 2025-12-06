@@ -4,4 +4,7 @@ class Player:
         self.nickname = nickname
 
 
-class Game: ...
+class Game:
+
+    def __init__(self, players):
+        self.players = players
