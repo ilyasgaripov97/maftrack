@@ -7,5 +7,7 @@ def test_create_new_game():
 
 
 def test_new_player():
-    player = Player() 
+    nickname = 'Bit'
+    player = Player(nickname) 
     assert isinstance(player, Player)
+    assert player.nickname == nickname
