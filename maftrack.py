@@ -38,7 +38,7 @@ Game phases:
 """
 
 from enum import Enum
-from random import randrange
+from random import randrange, shuffle
 
 
 class Role(Enum):
@@ -78,6 +78,7 @@ class Game:
             Role.MAFIA, Role.MAFIA,
             Role.DON
         ]
+        self.phases = []
 
     def assign_role(self, n, nickname, role):
         if self.slots.get(n):
@@ -85,7 +86,10 @@ class Game:
         
         self.slots[n] = Player(nickname), role
 
-    def assign_roles(self, nicknames):
+    def assign_roles(self, nicknames, randomize_sit_place=False):
+        if randomize_sit_place:
+            shuffle(nicknames)
+            
         for n, nickname in enumerate(nicknames, start=1):
             if not self.available_roles:
                 return
@@ -94,6 +98,6 @@ class Game:
 
 
 g = Game()
-g.assign_roles(['Bit', 'Dron', 'Arwen', 'Narogami', 'Infinity', 'Bambl', 'Star', 'Ludovig', 'Gena', 'Schaslivchik'])
+g.assign_roles(['Bit', 'Dron', 'Arwen', 'Narogami', 'Infinity', 'Bambl', 'Star', 'Ludovig', 'Gena', 'Schaslivchik'], randomize_sit_place=True)
 
 print(g.slots)
