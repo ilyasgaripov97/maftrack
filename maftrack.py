@@ -78,7 +78,7 @@ class Game:
             Role.MAFIA, Role.MAFIA,
             Role.DON
         ]
-        self.phases = []
+        self.nominated = []
 
     def assign_role(self, n, nickname, role):
         if self.slots.get(n):
@@ -86,8 +86,8 @@ class Game:
         
         self.slots[n] = Player(nickname), role
 
-    def assign_roles(self, nicknames, randomize_sit_place=False):
-        if randomize_sit_place:
+    def assign_roles(self, nicknames, randomize_sits=False):
+        if randomize_sits:
             shuffle(nicknames)
             
         for n, nickname in enumerate(nicknames, start=1):
@@ -96,8 +96,13 @@ class Game:
             
             self.assign_role(n, nickname, self.available_roles.pop(randrange(len(self.available_roles))))
 
+    def nominate(self, n):
+        self.nominated.append(self.slots[n])
+
+    
 
 g = Game()
-g.assign_roles(['Bit', 'Dron', 'Arwen', 'Narogami', 'Infinity', 'Bambl', 'Star', 'Ludovig', 'Gena', 'Schaslivchik'], randomize_sit_place=True)
-
+g.assign_roles(['Bit', 'Dron', 'Arwen', 'Narogami', 'Infinity', 'Bambl', 'Star', 'Ludovig', 'Gena', 'Schaslivchik'], randomize_sits=True)
+g.nominate(1)
 print(g.slots)
+print(g.nominated)
